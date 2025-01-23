@@ -2,33 +2,7 @@ import { useQueries, useQuery } from "@tanstack/react-query";
 import "./App.css";
 import PokemonCard from "./components/PokemonCard/PokemonCard";
 import CardList from "./components/ui/CardList/CardList";
-
-type PokemonInfo = {
-  name: string;
-  url: string;
-};
-
-type PokeInfoResult = {
-  results: PokemonInfo[];
-};
-
-type PokemonSprites = {
-  back_default: string;
-  back_female: string;
-  back_shiny: string;
-  back_shiny_female: string;
-  front_default: string;
-  front_female: string;
-  front_shiny: string;
-  front_shiny_female: string;
-};
-
-type Pokemon = {
-  id: number;
-  name: string;
-  imageUrl: string;
-  sprites: PokemonSprites;
-};
+import { PokemonInfo, PokeInfoResult, Pokemon } from "./types/PokemonTypes";
 
 const fetchPokemonsInfo = async () => {
   const url = "https://pokeapi.co/api/v2/pokemon/?limit=20";
