@@ -6,7 +6,7 @@ interface props {
 }
 
 function Card({ children }: props) {
-  return <div className={styles.card}>{children}</div>;
+  return <li className={styles.card}>{children}</li>;
 }
 
 export default Card;
