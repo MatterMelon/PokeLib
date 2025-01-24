@@ -1,3 +1,9 @@
 .name {
+    font-size: 2rem;
     text-transform: capitalize;
+}
+
+.typeList {
+    display: flex;
+    gap: 0.5rem;
 }

@@ -1,5 +1,6 @@
 .cardList {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     padding: 20px;
     gap: 5px;
     flex-wrap: wrap;
