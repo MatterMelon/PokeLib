@@ -1,10 +1,13 @@
 import Card from "../ui/Card/Card";
 import styles from "./PokemonCard.module.css";
-import { Pokemon } from "../../types/PokemonTypes";
+import { Pokemon, PokemonInfo } from "../../types/PokemonTypes";
 import Badge from "../ui/Badge/Badge";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../ui/Loader/Loader";
 
 interface Props {
-  pokemon: Pokemon | undefined;
+  pokemon?: Pokemon | undefined;
+  pokemonInfo: PokemonInfo;
 }
 
 const formatId = (id: number | undefined) => {
@@ -14,7 +17,26 @@ const formatId = (id: number | undefined) => {
   }
 };
 
-function PokemonCard({ pokemon }: Props) {
+const fetchPokemonByUrl = async (url: string) => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Response status ${response.status}`);
+  }
+  return response.json() as Promise<Pokemon>;
+};
+
+function PokemonCard({ pokemonInfo }: Props) {
+  const pokemonQuery = useQuery({
+    queryKey: ["pokemon", pokemonInfo.name],
+    queryFn: () => fetchPokemonByUrl(pokemonInfo.url),
+  });
+
+  if (pokemonQuery.isLoading) {
+    return <Loader />;
+  }
+
+  const pokemon = pokemonQuery.data;
+
   return (
     <Card>
       <img className={styles.image} src={pokemon?.sprites?.front_default}></img>
