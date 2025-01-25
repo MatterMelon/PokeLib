@@ -19,15 +19,11 @@ function App() {
     queryFn: fetchPokemonsInfo,
   });
 
-  return (
-    <>
-      {!pokemonsInfoQuery.isLoading ? (
-        <PokemonCardList pokemonsInfo={pokemonsInfoQuery} />
-      ) : (
-        <Loader />
-      )}
-    </>
-  );
+  if (pokemonsInfoQuery.isLoading) {
+    return <Loader />;
+  }
+
+  return <PokemonCardList pokemonsInfo={pokemonsInfoQuery.data} />;
 }
 
 export default App;

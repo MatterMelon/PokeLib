@@ -15,16 +15,14 @@ const formatId = (id: number | undefined) => {
 };
 
 function PokemonCard({ pokemon }: Props) {
-  console.log(pokemon?.types);
-
   return (
     <Card>
       <img className={styles.image} src={pokemon?.sprites?.front_default}></img>
       <span className={styles.id}>{formatId(pokemon?.id)}</span>
       <h3 className={styles.name}>{pokemon?.name}</h3>
       <div className={styles.typeList}>
-        {pokemon?.types.map((type) => (
-          <Badge>{type.type.name}</Badge>
+        {pokemon?.types.map((type, index) => (
+          <Badge key={index}>{type.type.name}</Badge>
         ))}
       </div>
     </Card>

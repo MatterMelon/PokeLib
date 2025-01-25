@@ -6,10 +6,12 @@ import Loader from "../ui/Loader/Loader";
 import Button from "../ui/Button/Button";
 
 interface Props {
-  pokemonsInfo: UseQueryResult<PokeInfoResult, Error>;
+  pokemonsInfo: PokeInfoResult | undefined;
 }
 
 function PokemonCardList({ pokemonsInfo }: Props) {
+  console.log(pokemonsInfo);
+
   const fetchPokemonByUrl = async (url: string) => {
     const response = await fetch(url);
     if (!response.ok) {
@@ -19,15 +21,13 @@ function PokemonCardList({ pokemonsInfo }: Props) {
   };
 
   const pokemons = useQueries({
-    queries: (pokemonsInfo?.data?.results ?? []).map((pokemon: PokemonInfo) => {
+    queries: (pokemonsInfo?.results ?? []).map((pokemon: PokemonInfo) => {
       return {
         queryKey: ["pokemon", pokemon.name],
         queryFn: () => fetchPokemonByUrl(pokemon.url),
       };
     }),
   });
-
-  console.log(pokemons);
 
   const handleNextPageBtnClick = () => {
     console.log("NEXT PAGE")!;
@@ -49,7 +49,7 @@ function PokemonCardList({ pokemonsInfo }: Props) {
     <>
       <CardList>
         {pokemons.map((pokemon) => (
-          <PokemonCard key={crypto.randomUUID()} pokemon={pokemon.data} />
+          <PokemonCard key={pokemon?.data?.id} pokemon={pokemon.data} />
         ))}
       </CardList>
       <Button onClick={handleNextPageBtnClick}>Next</Button>
