@@ -3,3 +3,23 @@
     background-color: #cfcfcf;
     border-radius: 0.2rem;
 }
+
+.grass {
+    background-color: rgb(118, 189, 118);
+}
+
+.fire {
+    background-color: rgb(255, 86, 86);
+}
+
+.ground {
+    background-color: rgb(167, 106, 50);
+}
+
+.water {
+    background-color: rgb(124, 124, 255);
+}
+
+.poison {
+    background-color: rgb(136, 34, 114);
+}

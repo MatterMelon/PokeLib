@@ -32,19 +32,32 @@ function PokemonCard({ pokemonInfo }: Props) {
   });
 
   if (pokemonQuery.isLoading) {
-    return <Loader />;
+    return (
+      <Card>
+        <div className={styles.mockImage}>
+          <Loader />
+        </div>
+      </Card>
+    );
   }
 
   const pokemon = pokemonQuery.data;
 
   return (
     <Card>
-      <img className={styles.image} src={pokemon?.sprites?.front_default}></img>
+      <img
+        width="100"
+        height="100"
+        className={styles.image}
+        src={pokemon?.sprites?.front_default}
+      ></img>
       <span className={styles.id}>{formatId(pokemon?.id)}</span>
       <h3 className={styles.name}>{pokemon?.name}</h3>
       <div className={styles.typeList}>
         {pokemon?.types.map((type, index) => (
-          <Badge key={index}>{type.type.name}</Badge>
+          <Badge key={index} type={type.type.name}>
+            {type.type.name}
+          </Badge>
         ))}
       </div>
     </Card>

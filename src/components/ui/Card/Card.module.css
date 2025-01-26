@@ -1,6 +1,7 @@
 .card {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 20px;
     border: 1px solid #bababa;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
