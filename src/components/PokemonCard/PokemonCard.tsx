@@ -1,13 +1,14 @@
 import Card from "../ui/Card/Card";
 import styles from "./PokemonCard.module.css";
-import { Pokemon, PokemonInfo } from "../../types/PokemonTypes";
+import { PokemonInfo } from "../../types/PokemonTypes";
 import Badge from "../ui/Badge/Badge";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../ui/Loader/Loader";
 import { useNavigate } from "react-router-dom";
+import PokemonService from "../../API/PokemonService";
 
 interface Props {
-  pokemonInfo?: PokemonInfo;
+  pokemonInfo: PokemonInfo;
 }
 
 const formatId = (id: number | undefined) => {
@@ -17,19 +18,11 @@ const formatId = (id: number | undefined) => {
   }
 };
 
-const fetchPokemonByUrl = async (url: string) => {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Response status ${response.status}`);
-  }
-  return response.json() as Promise<Pokemon>;
-};
-
 function PokemonCard({ pokemonInfo }: Props) {
   const navigate = useNavigate();
   const pokemonQuery = useQuery({
     queryKey: ["pokemon", pokemonInfo?.name],
-    queryFn: () => fetchPokemonByUrl(pokemonInfo.url),
+    queryFn: () => PokemonService.fetchPokemonByUrl(pokemonInfo.url),
   });
 
   if (pokemonQuery.isLoading) {
@@ -48,6 +41,7 @@ function PokemonCard({ pokemonInfo }: Props) {
       </Card>
     );
   }
+
   const pokemon = pokemonQuery.data;
 
   return (

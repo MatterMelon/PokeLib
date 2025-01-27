@@ -1,5 +1,13 @@
 import { pokeApiUrl } from "../globals";
-import { PokeInfoResult } from "../types/PokemonTypes";
+import { PokeInfoResult, Pokemon } from "../types/PokemonTypes";
+
+async function fetchUrl(url: string) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Response status ${response.status}`);
+    }
+    return response.json();
+};
 
 export default class PokemonService {
    static fetchPokemonsInfoPaginated = async (page: number, limit: number) => {
@@ -9,10 +17,10 @@ export default class PokemonService {
           limit +
           "&offset=" +
           page * limit;
-        const response = await fetch(queryUrl);
-        if (!response.ok) {
-          throw new Error(`Response status ${response.status}`);
-        }
-        return response.json() as Promise<PokeInfoResult>;
-      };
-};
+        return fetchUrl(queryUrl) as Promise<PokeInfoResult>;
+    }
+
+    static fetchPokemonByUrl = async (url: string) => {
+        return fetchUrl(url) as Promise<Pokemon>;
+    };
+}
