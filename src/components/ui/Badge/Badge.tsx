@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import styles from "./Badge.module.css";
 
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
   type?: string;
 }
 

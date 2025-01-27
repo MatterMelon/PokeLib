@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { PokeInfoResult, PokemonInfo } from "../../types/PokemonTypes";
-import PokemonCard from "../PokemonCard/PokemonCard";
-import CardList from "../ui/CardList/CardList";
-import Button from "../ui/Button/Button";
-import { pokeApiUrl } from "../../globals";
+import { PokeInfoResult, PokemonInfo } from "../types/PokemonTypes";
+import PokemonCard from "../components/PokemonCard/PokemonCard";
+import CardList from "../components/ui/CardList/CardList";
+import Button from "../components/ui/Button/Button";
+import { pokeApiUrl } from "../globals";
 import { useState } from "react";
+import PokemonMockCard from "../components/PokemonCard/PokemonMockCard";
 
+const queryLimit = 24;
 const fetchPokemonsInfoPaginated = async (page: number) => {
-  const queryLimit = 36;
   const queryUrl =
     pokeApiUrl +
     "pokemon/?limit=" +
@@ -33,12 +34,16 @@ function PokemonCardList() {
   return (
     <>
       <CardList>
-        {pokemonsInfo.map((pokemonInfo: PokemonInfo) => (
-          <PokemonCard key={pokemonInfo.name} pokemonInfo={pokemonInfo} />
-        ))}
+        {pokemonsInfoQuery.isLoading
+          ? [...Array(queryLimit)].map((_, i) => <PokemonMockCard key={i} />)
+          : pokemonsInfo.map((pokemonInfo: PokemonInfo) => (
+              <PokemonCard key={pokemonInfo.name} pokemonInfo={pokemonInfo} />
+            ))}
+
         {pokemonsInfoQuery?.data?.previous ? (
           <Button onClick={() => setPage((p) => p - 1)}>Prev</Button>
         ) : null}
+
         {pokemonsInfoQuery?.data?.next ? (
           <Button onClick={() => setPage((p) => p + 1)}>Next</Button>
         ) : null}

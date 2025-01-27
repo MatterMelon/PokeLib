@@ -1,0 +1,27 @@
+.navbar {
+    
+}
+
+.navbar__list {
+    list-style: none;
+    display: flex;
+}
+
+.navbar__item {
+    padding: 1rem 2rem;
+    border: 1px solid gray;
+}
+
+.navbar__item:not(:last-child) {
+    border-right: none;
+}
+
+.navbar__item:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+.navbar__link {
+    text-decoration: none;
+    color: black;
+    font-size: 2rem;
+}

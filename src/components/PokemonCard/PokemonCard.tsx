@@ -4,10 +4,10 @@ import { Pokemon, PokemonInfo } from "../../types/PokemonTypes";
 import Badge from "../ui/Badge/Badge";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../ui/Loader/Loader";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
-  pokemon?: Pokemon | undefined;
-  pokemonInfo: PokemonInfo;
+  pokemonInfo?: PokemonInfo;
 }
 
 const formatId = (id: number | undefined) => {
@@ -26,8 +26,9 @@ const fetchPokemonByUrl = async (url: string) => {
 };
 
 function PokemonCard({ pokemonInfo }: Props) {
+  const navigate = useNavigate();
   const pokemonQuery = useQuery({
-    queryKey: ["pokemon", pokemonInfo.name],
+    queryKey: ["pokemon", pokemonInfo?.name],
     queryFn: () => fetchPokemonByUrl(pokemonInfo.url),
   });
 
@@ -37,14 +38,20 @@ function PokemonCard({ pokemonInfo }: Props) {
         <div className={styles.mockImage}>
           <Loader />
         </div>
+        <span className={styles.id}>#0000</span>
+        <h3 className={styles.name}>PokeLib</h3>
+        <div className={styles.typeList}>
+          <Badge>badge</Badge>
+          <Badge>badge</Badge>
+          <Badge>badge</Badge>
+        </div>
       </Card>
     );
   }
-
   const pokemon = pokemonQuery.data;
 
   return (
-    <Card>
+    <Card onClick={() => navigate(`/pokemons/${pokemon?.name}`)}>
       <img
         width="100"
         height="100"

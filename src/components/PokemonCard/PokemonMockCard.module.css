@@ -1,0 +1,22 @@
+.mockImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 10rem;
+    align-self: center;
+}
+
+.mockId {
+    
+}
+
+.mockName {
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+
+.mockTypeList {
+    display: flex;
+    gap: 0.5rem;
+}
