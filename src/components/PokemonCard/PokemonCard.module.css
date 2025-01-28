@@ -1,0 +1,23 @@
+.name {
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+
+.typeList {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.image {
+    image-rendering: pixelated;
+    align-self: center;
+}
+
+.mockImage {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 10rem;
+}
