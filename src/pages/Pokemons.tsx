@@ -28,7 +28,7 @@ function PokemonCardList() {
           fetchNextPage();
         }
       },
-      { threshold: 1.0 } // Срабатывает, когда последний элемент полностью видим
+      { threshold: 1.0 }
     );
 
     observer.observe(lastElement.current);
@@ -45,7 +45,7 @@ function PokemonCardList() {
       <CardList>
         {data?.pages.map((page, i) => (
           <React.Fragment key={i}>
-            {page.results.map((pokemonInfo: PokemonInfo, index: number) => (
+            {page.results.map((pokemonInfo: PokemonInfo) => (
               <PokemonCard key={pokemonInfo.name} pokemonInfo={pokemonInfo} />
             ))}
           </React.Fragment>

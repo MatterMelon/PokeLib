@@ -13,7 +13,11 @@ export default class PokemonService {
     static fetchPokemonsInfoPaginated = async (page: number, limit: number) => {
         const offset = page * limit;
         const url = POKEMON_API + `pokemon?offset=${offset}&limit=${limit}`;
-        return fetchUrl<PokeInfoResult>(url);
+        const response = await fetchUrl<PokeInfoResult>(url);
+        return {
+            results: response.results,
+            next: response.next ? page + 1 : undefined,
+        };
     }
 
     static fetchPokemonByUrl = async (url: string) => {
