@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import { pokeApiUrl } from "../globals";
+import { POKEMON_API } from "../globals";
 import { Pokemon } from "../types/PokemonTypes";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchPokemonByName = async (name: string) => {
-  const url = pokeApiUrl + "pokemon/" + name;
+  const url = POKEMON_API + "pokemon/" + name;
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Response status ${response.status}`);
