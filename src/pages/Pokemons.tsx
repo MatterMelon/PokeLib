@@ -6,6 +6,7 @@ import Button from "../components/ui/Button/Button";
 import PokemonMockCard from "../components/PokemonCard/PokemonMockCard";
 import PokemonService from "../API/PokemonService";
 import React, { useEffect, useRef } from "react";
+import Loader from "../components/ui/Loader/Loader";
 
 function PokemonCardList() {
   const queryLimit = 24;
@@ -53,13 +54,7 @@ function PokemonCardList() {
         <div ref={lastElement}></div>
       </CardList>
 
-      <div style={{ height: "1px" }}>
-        {hasNextPage && (
-          <button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
-            {isFetchingNextPage ? "Loading more..." : "Load More"}
-          </button>
-        )}
-      </div>
+      {isFetchingNextPage && <Loader />}
     </>
   );
 }
