@@ -14,7 +14,7 @@ interface Props {
 const formatId = (id: number | undefined) => {
   if (id) {
     const idStr = id.toString();
-    return "#" + "0".repeat(4 - idStr.length) + idStr;
+    return "#" + "0".repeat(5 - idStr.length) + idStr;
   }
 };
 
