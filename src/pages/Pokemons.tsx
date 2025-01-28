@@ -22,7 +22,7 @@ function PokemonCardList() {
 
   useEffect(() => {
     if (!lastElement.current || !hasNextPage) return;
-
+    const lastElem = lastElement.current;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasNextPage) {
@@ -35,8 +35,8 @@ function PokemonCardList() {
     observer.observe(lastElement.current);
 
     return () => {
-      if (lastElement.current) {
-        observer.unobserve(lastElement.current);
+      if (lastElem) {
+        observer.unobserve(lastElem);
       }
     };
   }, [fetchNextPage, hasNextPage]);
