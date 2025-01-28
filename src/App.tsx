@@ -1,13 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Pokemons from "./pages/Pokemons";
-import Navbar from "./components/ui/Navbar/Navbar";
 import PokemonPage from "./pages/PokemonPage";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <Header />
       <Routes>
         <Route index path="/pokemons" element={<Pokemons />} />
         <Route path="/pokemons/:name" element={<PokemonPage />} />
